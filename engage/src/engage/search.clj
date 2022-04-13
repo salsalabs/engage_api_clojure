@@ -49,7 +49,7 @@
 
    You provide a request payload that describes the records to return. Engage
    finds matching records and returns then in batches of (typically) 20 records.
-   This function calls a function that you provide for each of the batches..
+   This function calls a function that you provide for each of the batches.
    This function also calls a function that lets you know the search progress.
 
    The search continues until all of the matching records are consumed.

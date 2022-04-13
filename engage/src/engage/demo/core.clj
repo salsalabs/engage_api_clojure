@@ -159,7 +159,7 @@ Uses the supporter consumer to display members."
     (search/supporter-search
      token
      request-payload
-     consumers/supporter-consumer
+     consumers/supporter-last-modified-consumer
      consumers/recorder)))
 
 (defn supporter-segment-search-demo

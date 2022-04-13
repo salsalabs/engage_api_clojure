@@ -1,6 +1,7 @@
 (ns engage.consumers
   (:gen-class)
-  (:require [clojure.data.json :as json]))
+  (:require [clojure.data.json :as json])
+  (:require [engage.core :as engage]))
 
 (defn activity-consumer
   "An example of a function to consume a list of activity records.
@@ -84,6 +85,25 @@
     (when (not-empty (rest a))
       (recur (rest a)))))
 
+
+(defn supporter-last-modified-consumer
+  "An example of a function to consume a list of supporter records.
+  This version displays the usual stuff and last-modified.
+
+  @param  slice {list} a list of Engage supporter records
+  @see https://api.salsalabs.org/api/integration/ext/v1/supporter/search"
+  [slice]
+  (loop [a slice]
+    (let [s (first a)
+          full-name (str (:firstName s) " " (:lastName s))
+          lastModifiedText (engage/java-date-to-engage (:lastModified s))
+          contacts (:contacts s)
+          contact (get contacts 0)
+          method (str (:type contact) ": " (:value contact))]
+      (printf "%-36s %-24s %-32s %-32s\n" (:supporterId s) full-name lastModifiedText method))
+    (when (not-empty (rest a))
+      (recur (rest a)))))
+
 (defn supporter-segment-consumer
   "An example of a function to consume a list of SupporterSegment records.
    The record is composed of supporterId and a list of segments.
@@ -100,6 +120,7 @@
       (segment-consumer segments))
     (when (not-empty (rest a))
       (recur (rest a)))))
+
 
 (defn recorder
   "Function to consume the current search status.
