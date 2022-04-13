@@ -220,6 +220,7 @@ Uses the supporter consumer to display members."
                          :default   (java.util.Date. (- 2025 1900) 1 1)
                          :type      :yyyy-mm-dd}]
                   :runs        activity-search-demo}
+
                  {:command     "segment-search"
                   :description "Demonstrate search for segments (groups)"
                   :runs        segment-search-demo}

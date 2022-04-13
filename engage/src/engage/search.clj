@@ -98,8 +98,7 @@
 
 (defn activity-search
   "Uses {@link #generic-search(token payload url list-accessor consumer recorder)}
-
-   to paginate through activity records.
+	to paginate through activity records.
 
    You provide a request payload that describes the activities to return.
    Engage finds matching records and returns them in batches of (typically)
