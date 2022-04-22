@@ -233,7 +233,7 @@
   "Uses {@link #generic-search(token payload url list-accessor consumer recorder)}
 
   to accepts a single supporter ID and paginate through the list of segments
-  that the supporter belongs 2.
+  in which the supporter is a member.
 
   You provide a request payload that describes the supporter to use for the
   search to return. Engage finds matching records and returns them in batches
