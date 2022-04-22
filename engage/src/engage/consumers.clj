@@ -59,7 +59,7 @@
             mailingList (:mailingList s "")
             publicName (:publicName s "")
             totalMembers (:totalMembers s -1)]
-        (printf "%-36s %-60s %-8s %10s %-20s %5d\n"
+        (printf "%-36s %-60s %-11s %-6s %-20s %5d\n"
                 segmentId
                 name
                 type
@@ -116,7 +116,7 @@
     (let [s (first a)
           supporterId (:supporterId s)
           segments (:segments s)]
-      (printf "supporterId: %s is in these (%d) segments\n", supporterId (count segments))
+      (printf "\nsupporterId: %s is in these (%d) segments\n", supporterId (count segments))
       (segment-consumer segments))
     (when (not-empty (rest a))
       (recur (rest a)))))
