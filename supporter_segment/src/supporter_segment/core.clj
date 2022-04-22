@@ -11,7 +11,7 @@
 
 (defn local-recorder
  "Function to consume the search status for while processing
- supporters for the provided segment.
+ segments for the provided supporter.
 
   @param  {number}  search offset
   @param  {number}  number of records returned
@@ -32,43 +32,6 @@
                           (sort)))]
     (str/join ","  names)))
 
-(defn supporters
-  "A supporter consumer accepts list of emails.  For each supporter ID:
-   1. looks up the associated segments,
-   2. does some formatting, and
-   3. writes a record containing the supporter info and the list of segments.
-   Presumes that all segments for a supporter are in the same record.
-   (Presumption borne out by documentation and observation.)
-    @param slice  {list}  list of Engage supporter IDs
-    @param spec   {hash}  specification provided by the configuration YAML file
-    @param stash  {hash}  storage keyed by email"
-  [slice spec stash]
-  (loop [a slice]
-    (let [s (first a)
-          token (:intToken spec)
-          request-payload {:identifiers [(:email s)]
-                           :identifierType "SUPPORTER_ID"
-                           :offset 0
-                           :count 10}]
-
-      (defn segments-results-proxy [slice]
-        (loop [a slice]
-          (let [result (first a)
-                segments (:segments result)
-                segment-text (segments-handler segments (:segmentId spec))
-                record [[(:email s) segment-text]]]
-            (csv/write-csv (:writer stash) record))
-          (when (not (empty? (rest a)))
-            (recur (rest a)))))
-
-      (search/supporter-segment-search
-       token
-       request-payload
-       segments-results-proxy
-       nil)
-      (when (not (empty? (rest a)))
-        (recur (rest a))))))
-
 (defn run
   "Produce a CSV of groups to which a supporter belongs."
 
@@ -82,7 +45,6 @@
                          :count           20}
         writer (io/writer csvFile)
         stash {:writer writer}]
-    (println request-payload)
     (csv/write-csv (:writer stash) [["segmentId"
                                      "name"
                                      "type"
