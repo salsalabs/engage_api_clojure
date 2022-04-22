@@ -99,16 +99,17 @@
    :description "Create a CSV of supporters in a group and the other groups to which they belong."
    :version     "0.0.1"
    :opts        [{:as      "YAML configuration file"
-                  :default nil
-                  :option  "login"
-                  :type    :string}
+                  :default  nil
+                  :option   "login"
+                  :required true
+                  :type     :string}
                  {:option   "segmentId"
-                  :as      "SegmentId of interest."
-                  :type    :string}
-                 {:option   "csvFile"
-                  :as       "CSV output of supporters and groups"
-                  :default  "supporter_xref_results.csv"
-                  :type     :string}]
+                  :as       "SegmentId of interest."
+                  :type     :string}
+                 {:option    "csvFile"
+                  :as        "CSV output of supporters and groups"
+                  :default   "supporter_xref_results.csv"
+                  :type      :string}]
    :runs run})
 
 (defn -main
