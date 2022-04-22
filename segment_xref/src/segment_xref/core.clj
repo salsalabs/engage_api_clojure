@@ -9,7 +9,7 @@
   (:require [engage.consumers :as consumers])
   (:require [engage.search :as search]))
 
-(defn segment-member-recorder
+(defn local-recorder
  "Function to consume the search status for while processing
  supporters for the provided segment.
 
@@ -91,7 +91,7 @@
      token
      request-payload
      supporters-proxy
-     segment-member-recorder))))
+     local-recorder))))
 
 ;; cli-matic configuration.  cli-matic made building this app a snap.
 (def CONFIGURATION
