@@ -96,7 +96,7 @@
 ;; cli-matic configuration.  cli-matic made building this app a snap.
 (def CONFIGURATION
   {:command     "segment_xref"
-   :description "Create a CSV of supporters in a group and the other groups to which they belong."
+   :description "Retrieves supporters for the specified segment, then shows the other groups to which the supporters belong. (whew)"
    :version     "0.0.1"
    :opts        [{:as      "YAML configuration file"
                   :default nil

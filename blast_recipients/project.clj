@@ -1,5 +1,5 @@
 (defproject blast_recipients "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
+  :description "Create a CSV of recipients for an email blast."
   :url "http://example.com/FIXME"
   :license {:name "EPL-2.0 OR GPL-2.0-or-later WITH Classpath-exception-2.0"
             :url "https://www.eclipse.org/legal/epl-2.0/"}
@@ -12,7 +12,7 @@
                  [clj-http "3.12.0"]
                  [clj-time "0.5.1"]
                  [cli-matic "0.4.3"]
-                 [engage "0.1.0"]]
+                 [engage "0.2.0T"]]
   :resource-paths ["resources" ]
   :main ^:skip-aot segment-xref.core
   :target-path "target/%s"

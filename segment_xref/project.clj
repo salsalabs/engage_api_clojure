@@ -1,6 +1,5 @@
 (defproject engage_segment_xref "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
+  :description "Create a CSV of supporters for a segment. A line contains a supporter and the segments that they joined."
   :license {:name "EPL-2.0 OR GPL-2.0-or-later WITH Classpath-exception-2.0"
             :url "https://www.eclipse.org/legal/epl-2.0/"}
   :dependencies [[clojure.java-time "0.3.0"]
@@ -12,7 +11,7 @@
                  [clj-http "3.12.0"]
                  [clj-time "0.5.1"]
                  [cli-matic "0.4.3"]
-                 [engage "0.1.0"]]
+                 [engage "0.2.0"]]
   :resource-paths ["resources" ]
   :main ^:skip-aot segment-xref.core
   :target-path "target/%s"
