@@ -36,9 +36,7 @@
                           {:headers {:content-type "application/json"
                                      :authToken token}
                            :body post-body-text})
-        jbody (json/read-str (:body resp) :key-fn keyword)
-        _ (println "jbody:")
-        _ (println jbody)]
+        jbody (json/read-str (:body resp) :key-fn keyword)]
     (when (some? (:errors jbody))
       (let [errors (:errors jbody)
             text (json/pprint errors)]
@@ -63,13 +61,12 @@
    @param   {function}  consumer         Function that uses a list of records
    @param   {function}  recorder         Function to accept the current offset, the number
                                          of records and the total records.  Can be nil.
-   @param   {boolean}   in-results       Search payload->results instead of just payload.
    @throws  {Exception} Throws an exception containing JSON for any errors
                         returned by the endpoint
    @see https://api.salsalabs.org/help/integration#operation/supporterSearch
    @see https://api.salsalabs.org/api/integration/ext/v1/activities/search
    @see https://api.salsalabs.org/api/integration/ext/v1/segments/members/search"
-  [token request-payload url list-accessor consumer recorder in-results]
+  [token request-payload url list-accessor consumer recorder]
   {:pre? (and (some? token)
               (some? request-payload)
               (some? url)
@@ -82,8 +79,7 @@
            payload request-payload]
       ;; TODO: Do some error checking here.
       (let [response (common-search t payload u)
-            payload (:payload response)
-            response-payload (if in-results (:results payload) payload)
+            response-payload (:payload response)
             ;; This is a bug.  THere should be offset, count and total.
             ;; There is only count.
             ;; That's why we use the offset from the request payload
@@ -124,7 +120,7 @@
 
   (let [url "https://api.salsalabs.org/api/integration/ext/v1/activities/search"
         list-accessor :activities]
-    (generic-search token request-payload url list-accessor consumer recorder false)))
+    (generic-search token request-payload url list-accessor consumer recorder)))
 
 (defn email-search
   "Uses {@link #generic-search(token payload url list-accessor consumer recorder)}
@@ -151,7 +147,7 @@
 
   (let [url "https://api.salsalabs.org/api/integration/ext/v1/emails/search"
         list-accessor :emailActivities]
-    (generic-search token request-payload url list-accessor consumer recorder false)))
+    (generic-search token request-payload url list-accessor consumer recorder)))
 
 (defn segment-search
   "Uses {@link #generic-search(token payload url list-accessor consumer recorder)}
@@ -178,7 +174,7 @@
 
   (let [url "https://api.salsalabs.org/api/integration/ext/v1/segments/search"
         list-accessor :segments]
-    (generic-search token request-payload url list-accessor consumer recorder false)))
+    (generic-search token request-payload url list-accessor consumer recorder)))
 
 (defn segment-member-search
   "Uses {@link #generic-search(token payload url list-accessor consumer recorder)}
@@ -205,7 +201,7 @@
 
   (let [url "https://api.salsalabs.org/api/integration/ext/v1/segments/members/search"
         list-accessor :supporters]
-    (generic-search token request-payload url list-accessor consumer recorder false)))
+    (generic-search token request-payload url list-accessor consumer recorder)))
 
 (defn supporter-search
   "Uses {@link #generic-search(token payload url list-accessor consumer recorder)}
@@ -232,7 +228,7 @@
 
   (let [url "https://api.salsalabs.org/api/integration/ext/v1/supporters/search"
         list-accessor :supporters]
-    (generic-search token request-payload url list-accessor consumer recorder false)))
+    (generic-search token request-payload url list-accessor consumer recorder)))
 
 (defn supporter-segment-search
   "Uses {@link #generic-search(token payload url list-accessor consumer recorder)}
@@ -260,4 +256,4 @@
 
   (let [url "https://api.salsalabs.org/api/integration/ext/v1/supporters/groups"
         list-accessor :segments]
-    (generic-search token request-payload url list-accessor consumer recorder false)))
+    (generic-search token request-payload url list-accessor consumer recorder)))
