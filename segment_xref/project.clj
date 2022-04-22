@@ -13,7 +13,7 @@
                  [cli-matic "0.4.3"]
                  [engage "0.2.0"]]
   :resource-paths ["resources" ]
-  :main ^:skip-aot segment-xref.core
+  :main ^:skip-aot segment_xref.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all
                        :jvm-opts ["-Dclojure.compiler.direct-linking=true"]}})

@@ -1,4 +1,4 @@
-(ns segment-xref.core
+(ns segment_xref.core
   (:gen-class)
   (:require [cli-matic.core :refer [run-cmd]])
   (:require [clojure.data.csv :as csv])
