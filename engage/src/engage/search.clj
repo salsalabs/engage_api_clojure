@@ -87,7 +87,6 @@
             current-count (:count response-payload 20)
             total (:total response-payload 20)
             records (list-accessor response-payload)]
-        (println records)
         (when (not (nil? recorder))
           (recorder offset current-count total))
         (consumer records)
@@ -255,5 +254,5 @@
   [token request-payload consumer recorder]
 
   (let [url "https://api.salsalabs.org/api/integration/ext/v1/supporters/groups"
-        list-accessor :segments]
+        list-accessor :results]
     (generic-search token request-payload url list-accessor consumer recorder)))
