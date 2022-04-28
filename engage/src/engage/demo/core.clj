@@ -1,27 +1,27 @@
 (ns engage.demo.core
   (:gen-class)
-  (:require [cli-matic.core :refer [run-cmd]])
-  (:require [clojure.data.json :as json])
-  (:require [engage.consumers :as consumers])
-  (:require [engage.core :as engage])
-  (:require [engage.metrics :as metrics])
-  (:require [engage.search :as search])
-  (:require [java-time :as jt]))
+  (:require [cli-matic.core :refer [run-cmd]]
+            [clojure.data.json :as json]
+            [engage.consumers :as consumers]
+            [engage.core :as engage]
+            [engage.metrics :as metrics]
+            [engage.search :as search]
+            [java-time :as jt]))
 
 (defn yaml-demo
   [{:keys [login]}]
   (println "yaml-demo: begin")
   (let [options (engage/use-yaml login)]
-    (printf "yaml-demo: login filename is %s\n" login)
-    (printf "yaml-demo: login filename contains these keys %s\n" (keys options))
-    (printf "yaml-demo: token is '%s'\n", (:intToken options)))
-  (println "yaml-demo: end"))
+      (printf "yaml-demo: login filename is %s\n" login)
+      (printf "yaml-demo: login filename contains these keys %s\n" (keys options))
+      (printf "yaml-demo: token is '%s'\n", (:intToken options)))
+    (println "yaml-demo: end"))
 
 (defn activity-search-demo
   "Demonstrate activity search by retrieving activities and displaying
-   a little bit of info for each activity.  Note that you can choose the
-   activity type by using --activityType in the command line. Search is
-   by last-modified date. Start and end last-modified are hard coded."
+  a little bit of info for each activity.  Note that you can choose the
+  activity type by using --activityType in the command line. Search is
+  by last-modified date. Start and end last-modified are hard coded."
   [{:keys [login activityType modifiedFrom modifiedTo]}]
   (let [spec (engage/use-yaml login)
         token (:intToken spec)
@@ -60,8 +60,8 @@ dates are hard coded."
 
 (defn generic-search-demo
   "Demonstrate generic search by retreiving supporters and displaying
-   a little bit of info for each supporter. Search is by last-modified date.
-   Start and end last-modifieds are hard-coded."
+  a little bit of info for each supporter. Search is by last-modified date.
+  Start and end last-modifieds are hard-coded."
   [{:keys [login]}]
   (let [spec (engage/use-yaml login)
         token (:intToken spec)
@@ -79,8 +79,8 @@ dates are hard coded."
 
 (defn common-search-demo
   "Demonstrate the generic search by retrieving the first batch of supporters.
-   Search is by the last-modified date.  Start and end last-modified dates are
-   hard-coded. Returns the response as a hash (id, headers and payload...)"
+  Search is by the last-modified date.  Start and end last-modified dates are
+  hard-coded. Returns the response as a hash (id, headers and payload...)"
   [{:keys [login]}]
   (let [spec (engage/use-yaml login)
         token (:intToken spec)
@@ -112,8 +112,8 @@ dates are hard coded."
 
 (defn segment-search-demo
   "Demonstrate segment search by retreiving segments and displaying
-   a little bit of info for each segment. Search is by last-modified date.
-   Start and end last-modifieds are hard-coded."
+  a little bit of info for each segment. Search is by last-modified date.
+  Start and end last-modifieds are hard-coded."
   [{:keys [login]}]
   (let [spec (engage/use-yaml login)
         token (:intToken spec)
@@ -129,7 +129,7 @@ dates are hard coded."
 
 (defn segment-member-search-demo
   "Demonstrate segment-member search.  You provide a segmentId in the payload.
-Uses the supporter consumer to display members."
+  Uses the supporter consumer to display members."
   [{:keys [login segmentId]}]
   (let [spec (engage/use-yaml login)
         token (:intToken spec)
@@ -144,8 +144,8 @@ Uses the supporter consumer to display members."
 
 (defn supporter-search-demo
   "Demonstrate supporter search by retrieving supporters and displaying
-   a little bit of info for each supporter. Search is by last-modified date.
-   Start and end last-modifieds are command-line options."
+  a little bit of info for each supporter. Search is by last-modified date.
+  Start and end last-modifieds are command-line options."
   [{:keys [login modifiedFrom modifiedTo]}]
   (let [spec (engage/use-yaml login)
         token (:intToken spec)
@@ -157,15 +157,15 @@ Uses the supporter consumer to display members."
                          :count 10
                          :includeNormal true}]
     (search/supporter-search
-     token
-     request-payload
-     consumers/supporter-last-modified-consumer
-     consumers/recorder)))
+      token
+      request-payload
+      consumers/supporter-last-modified-consumer
+      consumers/recorder)))
 
 (defn supporter-segment-search-demo
   "Demonstrate paginating through segments for a supporter.  The output
-     is ~10 lines of segment info for the provided supporterId. You
-     provide an integration API token and a supporterId."
+  is ~10 lines of segment info for the provided supporterId. You
+  provide an integration API token and a supporterId."
   [{:keys [login supporterId]}]
   (let [spec (engage/use-yaml login)
         token (:intToken spec)
@@ -175,10 +175,10 @@ Uses the supporter consumer to display members."
                          :offset 0
                          :count 10}]
     (search/supporter-segment-search
-     token
-     request-payload
-     consumers/supporter-segment-consumer
-     consumers/recorder)))
+      token
+      request-payload
+      consumers/supporter-segment-consumer
+      consumers/recorder)))
 
 ;; cli-matic configuration.  cli-matic made building this app a snap.
 (def CONFIGURATION
