@@ -1,7 +1,7 @@
 (ns engage.metrics
   (:gen-class)
-  (:require [clojure.data.json :as json])
-  (:require [clj-http.client :as client]))
+  (:require [clojure.data.json :as json]
+            [clj-http.client :as client]))
 
 (defn get-metrics
   "Read Engage metrics. Return the metrics as a hash. Throws exceptions.

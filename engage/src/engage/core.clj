@@ -1,6 +1,6 @@
 (ns engage.core
-    (:require [java-time :as jt])
-    (:require [clj-yaml.core :as yaml]))
+    (:require [java-time :as jt]
+              [clj-yaml.core :as yaml]))
 
 "We'll put constants and common utility things here..."
 

@@ -1,7 +1,7 @@
 (ns engage.consumers
   (:gen-class)
-  (:require [clojure.data.json :as json])
-  (:require [engage.core :as engage]))
+  (:require [clojure.data.json :as json]
+            [engage.core :as engage]))
 
 (defn activity-consumer
   "An example of a function to consume a list of activity records.

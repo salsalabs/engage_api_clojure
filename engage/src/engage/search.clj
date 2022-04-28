@@ -1,8 +1,8 @@
 (ns engage.search
   (:gen-class)
-  (:require [clojure.data.json :as json])
-  (:require [clj-http.client :as client])
-  (:require [engage.metrics :as metrics]))
+  (:require [clojure.data.json :as json]
+            [clj-http.client :as client]
+            [engage.metrics :as metrics]))
 
 (defn common-search
   "Engage uses POSTs to search for data. The generic search accepts
